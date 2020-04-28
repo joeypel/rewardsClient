@@ -10,7 +10,7 @@ const TaskItem = props => {
                 <Image
                     style={styles.image}
                     source={{
-                        uri: 'https://reactnative.dev/img/tiny_logo.png',
+                        uri: props.image,
                     }}
                 />
             </View>

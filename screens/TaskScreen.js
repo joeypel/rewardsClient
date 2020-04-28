@@ -5,6 +5,18 @@ import TaskItem from '../components/TaskItem'
 
 const TaskScreen = props => {
 
+
+    const loadOffers = async () => {
+        //set isloading/isrefreshing here
+        try {
+
+        }
+
+        catch{
+
+        }
+    }
+
     return (
         // <Text>hey</Text>
         <FlatList
@@ -14,6 +26,7 @@ const TaskScreen = props => {
                 offerName={item.Offer.name}
                 offerDescription={item.Offer.description}
                 offerAmount={item.Offer.amount}
+                image={item.Offer.icon}
             ></TaskItem>)}
         ></FlatList >
     )
