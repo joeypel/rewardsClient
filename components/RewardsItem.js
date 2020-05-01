@@ -24,7 +24,7 @@ const RewardsItem = props => {
         <TouchableCmp onPress={props.onSelect} useForeground>
           <View>
             <View style={styles.imageContainer}>
-              <Image style={styles.image} source={{ uri: props.image }} />
+              {props.image ? <Image style={styles.image} source={{ uri: props.image }} /> : <Image style={styles.image} source={{ uri: ('https://via.placeholder.com/350x150') }} />}
             </View>
             <View style={styles.details}>
               <Text style={styles.title}>{props.title}</Text>

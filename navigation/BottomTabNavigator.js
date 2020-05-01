@@ -3,10 +3,9 @@ import * as React from 'react';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import TaskScreen from '../screens/TaskScreen';
 import TaskStack from '../stacks/TaskStack';
 import RewardsStack from '../stacks/RewardsStack'
+import AccountStack from '../stacks/AccountStack'
 
 const BottomTab = createBottomTabNavigator();
 
@@ -21,21 +20,22 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
         }}
       />
-      <BottomTab.Screen
-        name="Balance"
-        component={LinksScreen}
-        options={{
-          title: 'Balance',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
-        }}
-      />
-      <BottomTab.Screen
+            <BottomTab.Screen
         name="Rewards"
         component={RewardsStack}
         options={{
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-gift" />,
         }}
       />
+      <BottomTab.Screen
+        name="Account"
+        component={AccountStack}
+        options={{
+          title: 'Account',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-person" />,
+        }}
+      />
+
     </BottomTab.Navigator>
   );
 }

@@ -1,17 +1,46 @@
-import React, { useState, } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import Card from '../components/Card'
 import RewardsItem from '../components/RewardsItem'
 
 const RewardsScreen = props => {
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [rewardsData, setRewardsData] = useState([]);
+    const userToken = useSelector(state => state.auth.token);
+
+    const loadRewardsData = async () => {
+        setIsRefreshing(true);
+        try {
+            const res = await fetch(
+                `https://hedgebetcalculator.com/services/rewards`,
+                {
+                    method: 'GET', headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        token: userToken,
+                    },
+                }
+            );
+
+            setRewardsData(await res.json());
+        } catch (err) {
+            console.log(err)
+        }
+        setIsRefreshing(false);
+    }
+
+    useEffect(() => {
+        loadRewardsData()
+    }, [])
 
     return (
         <FlatList
             data={rewardsData}
             keyExtractor={item => Math.random().toString()}
             renderItem={({ item }) => (
-                <RewardsItem title={item.title} price={item.price} image={('https://via.placeholder.com/350x150')} onSelect={() => { console.log("selected reward") }}></RewardsItem>
+                <RewardsItem title={item.title} price={item.price} image={item.image} onSelect={() => { console.log("selected reward") }}></RewardsItem>
             )}
         ></FlatList >
     )
@@ -19,6 +48,5 @@ const RewardsScreen = props => {
 
 export default RewardsScreen
 
-const rewardsData = [{ title: "Paypal $10", price: 1000 }, { title: "Amazon $10 Giftcard", price: 1000 }, { title: "$10 Bitcoin", price: 1000 }]
 // console.log(new Map(Object.entries(taskData)))
 // console.log(x.get("6500"))
