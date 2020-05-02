@@ -53,7 +53,7 @@ export default Chip = props => {
           }
         }}
       >
-        <Text style={styles.chipText}>{props.text}</Text>
+        <Text numberOfLines={1} style={styles.chipText}>{props.text}</Text>
       </View>
     )
   }
@@ -64,10 +64,10 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 5,
     paddingHorizontal: 16,
-    marginHorizontal: 4,
-    paddingVertical: 2
+    marginHorizontal: 0,
+    paddingVertical: 2,
   },
-  chipText: { fontSize: 14 },
+  chipText: { fontSize: 15, fontWeight: 'bold', },
   lineChip: {
     backgroundColor: 'lightgreen',
     borderColor: 'green',

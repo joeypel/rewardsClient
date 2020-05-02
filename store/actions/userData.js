@@ -24,8 +24,8 @@ export const refreshUser = (token) => {
         }
 
         const resData = await response.json();
-
-        dispatch({ type: 'REFRESHUSER', resData }
+        console.log(resData)
+        dispatch({ type: 'REFRESHUSER', username: resData.email, balance: resData.balance, userID: resData._id }
         );
     };
 }

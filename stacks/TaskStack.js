@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import { Text } from 'react-native'
 
-import HeaderButton from "../components/HeaderButton";
 import TaskScreen from '../screens/TaskScreen'
+import TaskDetailScreen from '../screens/TaskDetailScreen'
 const Stack = createStackNavigator();
 
 
@@ -14,7 +14,7 @@ const TaskStack = () => {
         <Stack.Navigator>
             <Stack.Screen name="Tasks" component={TaskScreen} options={{
             }} />
-            {/* <Stack.Screen name="TaskDetails" component={TaskDetails}/> */}
+            <Stack.Screen name="Task Info" component={TaskDetailScreen} options={{ headerBackTitle: 'Back' }} />
         </Stack.Navigator>
     )
 }

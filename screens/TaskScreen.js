@@ -1,32 +1,59 @@
-import React, { useState, } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, Text, FlatList } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import TaskItem from '../components/TaskItem'
+import TaskHeader from '../components/TaskHeader'
 
 const TaskScreen = props => {
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [taskData, setTaskData] = useState([]);
+    const userToken = useSelector(state => state.auth.token);
+    const userData = useSelector(state => state.user);
 
 
-    const loadOffers = async () => {
-        //set isloading/isrefreshing here
+    const loadTasksData = async () => {
+        setIsRefreshing(true);
         try {
+            const res = await fetch(
+                `https://hedgebetcalculator.com/services/offers`,
+                {
+                    method: 'GET', headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        token: userToken,
+                    },
+                }
+            );
 
+            setTaskData(await res.json());
+        } catch (err) {
+            console.log(err)
         }
-
-        catch{
-
-        }
+        setIsRefreshing(false);
     }
+
+    useEffect(() => {
+        loadTasksData()
+    }, [])
+
+    const handleTaskPress = taskData => {
+        props.navigation.navigate('Task Info', { taskData, userData })
+    }
+
 
     return (
         // <Text>hey</Text>
         <FlatList
-            data={x}
-            keyExtractor={item => Math.random().toString()}
+            data={taskData}
+            keyExtractor={item => item.offer_id}
+            ListHeaderComponent={<TaskHeader userData={userData}></TaskHeader>}
             renderItem={({ item }) => (<TaskItem
-                offerName={item.Offer.name}
-                offerDescription={item.Offer.description}
-                offerAmount={item.Offer.amount}
-                image={item.Offer.icon}
+                onPress={() => { handleTaskPress(item) }}
+                offerName={item.offer_name}
+                offerDescription={item.offer_desc}
+                offerAmount={item.amount}
+                image={item.image_url_220x124}
             ></TaskItem>)}
         ></FlatList >
     )

@@ -4,13 +4,12 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-    console.log("trigger2")
     switch (action.type) {
         case 'REFRESHUSER':
-            console.log("trigger")
             return {
                 username: action.username,
-                balance: action.balance
+                balance: action.balance,
+                userID: action.userID
             };
         default:
             return state;

@@ -6,17 +6,21 @@ import * as UserDataActions from '../store/actions/userData'
 
 const AccountScreen = props => {
     const userToken = useSelector(state => state.auth.token)
+    const userData = useSelector(state => state.user)
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(UserDataActions.refreshUser(userToken))
-    }, [])
+    // useEffect(() => {
+    //     dispatch(UserDataActions.refreshUser(userToken))//
+    // }, [])
 
     if (userToken) {
+        console.log(userData)
+        // dispatch(UserDataActions.refreshUser(userToken))//
         return (
             <View style={{ alignItems: 'center' }}>
+                <Text>{userData.username}</Text>
+                <Text>{userData.balance}</Text>
                 <Text>How it works</Text>
-                <Text>Help</Text>
                 <Text>Log Out</Text>
                 <Text></Text>
                 <Text>Terms of Service</Text>
