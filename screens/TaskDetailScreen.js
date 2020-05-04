@@ -5,14 +5,12 @@ import Chip from '../components/Chip'
 
 
 const TaskDetailScreen = ({ navigation, route }) => {
-    console.log(route.params)
 
     const handleTaskStartPress = async url => {
 
-        Linking.openURL(url.replace('{playerid}', route.params.userData.userID))
+        Linking.openURL(url.replace('[USER_ID]', route.params.userData.userID))
         // console.log(url)
     }
-    console.log(route.params.taskData.icon)
 
     return (
         <View style={styles.main}>
@@ -21,19 +19,19 @@ const TaskDetailScreen = ({ navigation, route }) => {
                     <Image
                         style={styles.image}
                         source={{
-                            uri: route.params.taskData.icon,
+                            uri: route.params.taskData.image_url,
                         }}
                     />
                 </View>
-                <View style={{ alignItems: 'center', margin: 10 }}><Text>{route.params.taskData.name}</Text>
+                <View style={{ alignItems: 'center', margin: 10, flex: 3 }}><Text>{route.params.taskData.offer_name}</Text>
                     <Chip text={"+" + route.params.taskData.amount}></Chip></View>
             </View>
             <View style={styles.bottom}>
                 <Text style={styles.descriptionTitle}>Description</Text>
-                <Text>{route.params.taskData.description}</Text>
+                <Text>{route.params.taskData.offer_desc}</Text>
                 <Text style={styles.descriptionTitle}>Instructions</Text>
-                <Text>{route.params.taskData.instructions}</Text>
-                <Button title="Start Task" onPress={() => handleTaskStartPress(route.params.taskData.tracking_url)}></Button>
+                <Text>{route.params.taskData.call_to_action}</Text>
+                <Button title="Start Task" onPress={() => handleTaskStartPress(route.params.taskData.offer_url)}></Button>
             </View>
         </View >
     )
@@ -42,9 +40,9 @@ const TaskDetailScreen = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
     main: { flex: 1 },
-    top: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth },
+    top: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth, paddingHorizontal: 10 },
     bottom: { flex: 3, padding: 10 },
-    imageContainer: { height: 100, width: 100, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' },
+    imageContainer: { height: 100, width: 100, justifyContent: 'center', alignItems: 'center', overflow: 'hidden', flex: 1 },
     image: { height: '100%', width: '100%', borderRadius: 20 },
 
 

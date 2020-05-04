@@ -15,8 +15,8 @@ const TaskItem = props => {
                 />
             </View>
             <View style={styles.content}>
-                <Text style={styles.offerName}>{props.offerName}</Text>
-                <Text numberOfLines={2}>{props.offerDescription}</Text>
+                <Text numberOfLines={1} style={styles.offerName}>{props.offerName}</Text>
+                <Text numberOfLines={2} style={styles.description}>{props.offerDescription}</Text>
             </View>
             <View style={styles.amount}>
                 <Chip text={"+" + props.offerAmount} ></Chip>
@@ -25,11 +25,12 @@ const TaskItem = props => {
 }
 
 const styles = StyleSheet.create({
-    main: { paddingVertical: 8, flex: 1, flexDirection: 'row', minHeight: 50, justifyContent: 'center', borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: 'black' },
+    main: { paddingVertical: 8, flex: 1, flexDirection: 'row', minHeight: 50, justifyContent: 'center', borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: 'black', minHeight: 80 },
     imageContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' },
     image: { height: '90%', width: '90%', borderRadius: 20 },
     content: { flex: 3 },
     amount: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+    description: { color: 'gray', fontSize: 12 },
     offerName: { fontWeight: 'bold', fontSize: 16 }
 })
 export default TaskItem

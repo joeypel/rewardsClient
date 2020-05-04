@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   mainChip: {
     borderWidth: 0.5,
     borderRadius: 5,
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     marginHorizontal: 0,
     paddingVertical: 2,
   },

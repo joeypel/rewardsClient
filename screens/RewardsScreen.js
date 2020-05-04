@@ -31,16 +31,22 @@ const RewardsScreen = props => {
         setIsRefreshing(false);
     }
 
+    const handleRewardSelect = item => {
+        console.log("make post request to redeem item:" + item.title)
+    }
+
     useEffect(() => {
         loadRewardsData()
     }, [])
+
+
 
     return (
         <FlatList
             data={rewardsData}
             keyExtractor={item => Math.random().toString()}
             renderItem={({ item }) => (
-                <RewardsItem title={item.title} price={item.price} image={item.image} onSelect={() => { console.log("selected reward") }}></RewardsItem>
+                <RewardsItem title={item.title} price={item.price} image={item.image} onSelect={() => handleRewardSelect(item)}></RewardsItem>
             )}
         ></FlatList >
     )
