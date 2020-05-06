@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as UserDataActions from '../store/actions/userData'
 import TaskItem from '../components/TaskItem'
 import TaskHeader from '../components/TaskHeader'
+import PageHeader from '../components/PageHeader'
 
 const TaskScreen = props => {
     const [isRefreshing, setIsRefreshing] = useState(false);
@@ -52,7 +53,17 @@ const TaskScreen = props => {
         <FlatList
             data={taskData}
             keyExtractor={item => item.offer_id}
-            ListHeaderComponent={<TaskHeader userData={userData}></TaskHeader>}
+            ListHeaderComponent={<View>
+                <PageHeader username={userData.username} balance={userData.balance}></PageHeader>
+                <View>
+                    <Text style={{ fontWeight: 'bold', fontFamily: 'Avenir', fontSize: 20 }}>Available Tasks</Text>
+                    <TaskItem
+                        onPress={() => { handleTaskPress('REFERRAL') }}
+                        offerName={"Refer A Friend!"}
+                        offerDescription={"Invite your friends and earn 15% of their coin earnings!"}
+                        offerAmount={"Unlimited"}
+                        image={'holder'}></TaskItem>
+                </View></View>}
             onRefresh={() => loadTasksData()}
             refreshing={isRefreshing}
             renderItem={({ item }) => (<TaskItem

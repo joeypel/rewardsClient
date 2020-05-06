@@ -1,27 +1,47 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Text, Image, TouchableOpacity, ShadowPropTypesIOS } from 'react-native'
+import { View, StyleSheet, Image, TouchableOpacity, ShadowPropTypesIOS } from 'react-native'
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Badge } from 'native-base';
+
 
 import Chip from '../components/Chip'
 
 const TaskItem = props => {
+    // return (
+    //     <TouchableOpacity style={styles.main} onPress={props.onPress}>
+    //         <View style={styles.imageContainer}>
+    //             <Image
+    //                 style={styles.image}
+    //                 source={{
+    //                     uri: props.image,
+    //                 }}
+    //             />
+    //         </View>
+    //         <View style={styles.content}>
+    //             <Text numberOfLines={1} style={styles.offerName}>{props.offerName}</Text>
+    //             <Text numberOfLines={2} style={styles.description}>{props.offerDescription}</Text>
+    //         </View>
+    //         <View style={styles.amount}>
+    //             <Chip text={"+" + props.offerAmount} ></Chip>
+    //         </View>
+    //     </TouchableOpacity>)
     return (
-        <TouchableOpacity style={styles.main} onPress={props.onPress}>
-            <View style={styles.imageContainer}>
-                <Image
-                    style={styles.image}
-                    source={{
-                        uri: props.image,
-                    }}
-                />
-            </View>
-            <View style={styles.content}>
-                <Text numberOfLines={1} style={styles.offerName}>{props.offerName}</Text>
-                <Text numberOfLines={2} style={styles.description}>{props.offerDescription}</Text>
-            </View>
-            <View style={styles.amount}>
-                <Chip text={"+" + props.offerAmount} ></Chip>
-            </View>
-        </TouchableOpacity>)
+
+        <ListItem thumbnail onPress={props.onPress}>
+            <Left>
+                <Thumbnail large source={{ uri: props.image }} />
+            </Left>
+            <Body>
+                <Text>{props.offerName}</Text>
+                <Text style={{ fontSize: 13, color: 'gray' }} numberOfLines={2}>{props.offerDescription}</Text>
+            </Body>
+            <Right>
+                <Badge info>
+                    <Text style={{ fontWeight: 'bold' }}>{"+" + props.offerAmount}</Text>
+                </Badge>
+            </Right>
+        </ListItem>
+
+    )
 }
 
 const styles = StyleSheet.create({

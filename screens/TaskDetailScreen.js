@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Text, Image, Button, Linking } from 'react-native'
+import { View, StyleSheet, Image, Linking } from 'react-native'
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
 
 import Chip from '../components/Chip'
 
@@ -12,30 +13,62 @@ const TaskDetailScreen = ({ navigation, route }) => {
         // console.log(url)
     }
 
+    // return (
+    //     <View style={styles.main}>
+    //         <View style={styles.top}>
+    //             <View style={styles.imageContainer}>
+    //                 <Image
+    //                     style={styles.image}
+    //                     source={{
+    //                         uri: route.params.taskData.image_url,
+    //                     }}
+    //                 />
+    //             </View>
+    //             <View style={{ alignItems: 'center', margin: 10, flex: 3 }}><Text>{route.params.taskData.offer_name}</Text>
+    //                 <Chip text={"+" + route.params.taskData.amount}></Chip></View>
+    //         </View>
+    //         <View style={styles.bottom}>
+    //             <Text style={styles.descriptionTitle}>Description</Text>
+    //             <Text>{route.params.taskData.offer_desc}</Text>
+    //             <Text style={styles.descriptionTitle}>Instructions</Text>
+    //             <Text>{route.params.taskData.call_to_action}</Text>
+    //             <Button title="Start Task" onPress={() => handleTaskStartPress(route.params.taskData.offer_url)}></Button>
+    //         </View>
+    //     </View >
+    // )
     return (
-        <View style={styles.main}>
-            <View style={styles.top}>
-                <View style={styles.imageContainer}>
-                    <Image
-                        style={styles.image}
-                        source={{
-                            uri: route.params.taskData.image_url,
-                        }}
-                    />
-                </View>
-                <View style={{ alignItems: 'center', margin: 10, flex: 3 }}><Text>{route.params.taskData.offer_name}</Text>
-                    <Chip text={"+" + route.params.taskData.amount}></Chip></View>
-            </View>
-            <View style={styles.bottom}>
-                <Text style={styles.descriptionTitle}>Description</Text>
-                <Text>{route.params.taskData.offer_desc}</Text>
-                <Text style={styles.descriptionTitle}>Instructions</Text>
-                <Text>{route.params.taskData.call_to_action}</Text>
-                <Button title="Start Task" onPress={() => handleTaskStartPress(route.params.taskData.offer_url)}></Button>
-            </View>
-        </View >
+        <Content>
+            <Card style={{ flex: 0 }}>
+                <CardItem>
+                    <Left>
+                        <Thumbnail source={{ uri: 'https://hedgebetcalculator.com/services/public/img/profile.png' }} />
+                        <Body>
+                            <Text style={{ fontWeight: 'bold' }}>{route.params.taskData.offer_name}</Text>
+                            <Text note>{new Date().toLocaleString()}</Text>
+                        </Body>
+                    </Left>
+                </CardItem>
+                <CardItem>
+                    <Body>
+                        <Image source={{ uri: route.params.taskData.image_url }} style={{ height: 150, width: 150, flex: 1, alignSelf: 'center', overflow: 'hidden', borderRadius: 10 }} />
+                        <Text style={styles.descriptionTitle}>Description</Text>
+                        <Text>{route.params.taskData.offer_desc}</Text>
+                        <Text style={styles.descriptionTitle}>Instructions</Text>
+                        <Text>{route.params.taskData.call_to_action}</Text>
+                        <Text style={styles.descriptionTitle}>Disclaimer</Text>
+                        <Text>{route.params.taskData.disclaimer}</Text>
+                    </Body>
+                </CardItem>
+                <CardItem style={{ justifyContent: 'center' }}>
+                    <Button onPress={() => handleTaskStartPress(route.params.taskData.offer_url)}>
+                        <Text>Start Offer</Text>
+                        <Icon name="ios-arrow-forward" />
+                    </Button>
+                </CardItem>
+            </Card>
+        </Content>
     )
-    // return (<View><Text>{JSON.stringify(props.route.params)}</Text></View>)
+
 }
 
 const styles = StyleSheet.create({

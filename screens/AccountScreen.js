@@ -1,8 +1,10 @@
 import React, { useState, useEffect, } from 'react'
-import { View, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight } from 'react-native'
+import { View, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight, Linking } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
 import { Container, Header, Content, List, ListItem, Text, Separator, Thumbnail, Left, Body, Right, Button } from 'native-base';
+
+import PageHeader from '../components/PageHeader'
 
 import * as UserDataActions from '../store/actions/userData'
 
@@ -20,22 +22,7 @@ const AccountScreen = props => {
         // dispatch(UserDataActions.refreshUser(userToken))//
         return (
             <Content>
-                <List>
-                    <ListItem thumbnail>
-                        <Left>
-                            <Thumbnail square source={{ uri: 'https://hedgebetcalculator.com/services/public/img/profile.png' }} />
-                        </Left>
-                        <Body>
-                            <Text>{userData.username}</Text>
-                            <Text note numberOfLines={1}>Balance: {userData.balance}</Text>
-                        </Body>
-                        <Right>
-                            <Button transparent>
-                                <Text>Refresh</Text>
-                            </Button>
-                        </Right>
-                    </ListItem>
-                </List>
+                <PageHeader username={userData.username} balance={userData.balance}></PageHeader>
                 <Separator bordered>
                     <Text>Your Account</Text>
                 </Separator>
@@ -57,8 +44,11 @@ const AccountScreen = props => {
                 <ListItem>
                     <Text>Privacy Policy</Text>
                 </ListItem>
-                <ListItem last>
+                <ListItem>
                     <Text>Terms of Service</Text>
+                </ListItem>
+                <ListItem last onPress={() => Linking.openURL("mailto:support@example.com")}>
+                    <Text>Contact us! </Text>
                 </ListItem>
             </Content>
         )
