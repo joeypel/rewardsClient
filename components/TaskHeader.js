@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity, ShadowPropTypesIOS } from 'react-native'
 
+import Card from './Card'
 import Chip from './Chip'
 
 const TaskItem = props => {
     return (
         <View>
-            <View style={styles.content}>
+            <Card style={styles.content}>
                 <Text style={styles.text}>Welcome, {props.userData.username}!</Text>
                 <Text style={styles.text}>You currently have {props.userData.balance} coins</Text>
                 <Text style={styles.text}>Happy earning!</Text>
 
-            </View>
+            </Card>
             <View>
                 <Text style={styles.tasksText}>Available Tasks</Text>
             </View>

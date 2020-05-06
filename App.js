@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'
 import ReduxThunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
+import { Container, Text } from 'native-base';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
@@ -74,9 +75,11 @@ export default function App(props) {
           <PersistGate loading={null} persistor={persistor}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
             <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-              <Stack.Navigator>
-                <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-              </Stack.Navigator>
+              <Container>
+                <Stack.Navigator>
+                  <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+                </Stack.Navigator>
+              </Container>
             </NavigationContainer>
           </PersistGate>
         </Provider>

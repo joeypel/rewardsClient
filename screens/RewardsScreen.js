@@ -32,6 +32,7 @@ const RewardsScreen = props => {
     }
 
     const handleRewardSelect = item => {
+        // fetch('https://hedgebetcalculator.com/services/rewardredeem')
         console.log("make post request to redeem item:" + item.title)
     }
 

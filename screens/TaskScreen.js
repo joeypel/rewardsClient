@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text, FlatList } from 'react-native'
-import { useSelector } from 'react-redux'
+import { View, StyleSheet, Text, FlatList, Platform } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
 
+import * as UserDataActions from '../store/actions/userData'
 import TaskItem from '../components/TaskItem'
 import TaskHeader from '../components/TaskHeader'
 
@@ -10,9 +11,11 @@ const TaskScreen = props => {
     const [taskData, setTaskData] = useState([]);
     const userToken = useSelector(state => state.auth.token);
     const userData = useSelector(state => state.user);
+    const dispatch = useDispatch();
 
 
     const loadTasksData = async () => {
+        dispatch(UserDataActions.refreshUser(userToken))//
         setIsRefreshing(true);
         try {
             const res = await fetch(
@@ -22,6 +25,7 @@ const TaskScreen = props => {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
                         token: userToken,
+                        device: Platform.OS
                     },
                 }
             );
@@ -35,6 +39,7 @@ const TaskScreen = props => {
 
     useEffect(() => {
         loadTasksData()
+
     }, [])
 
     const handleTaskPress = taskData => {
