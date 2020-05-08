@@ -4,11 +4,13 @@ import { useSelector } from 'react-redux'
 
 import Card from '../components/Card'
 import RewardsItem from '../components/RewardsItem'
+import PageHeader from '../components/PageHeader'
 
 const RewardsScreen = props => {
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [rewardsData, setRewardsData] = useState([]);
     const userToken = useSelector(state => state.auth.token);
+    const userData = useSelector(state => state.user);
 
     const loadRewardsData = async () => {
         setIsRefreshing(true);
@@ -45,6 +47,7 @@ const RewardsScreen = props => {
     return (
         <FlatList
             data={rewardsData}
+            ListHeaderComponent={<PageHeader username={userData.username} balance={userData.balance}></PageHeader>}
             keyExtractor={item => Math.random().toString()}
             renderItem={({ item }) => (
                 <RewardsItem title={item.title} price={item.price} image={item.image} onSelect={() => handleRewardSelect(item)}></RewardsItem>

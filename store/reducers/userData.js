@@ -1,6 +1,7 @@
 const initialState = {
     username: null,
-    balance: null
+    balance: null,
+    userID: null
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +12,8 @@ export default (state = initialState, action) => {
                 balance: action.balance,
                 userID: action.userID
             };
+        case 'LOGOUT':
+            return initialState
         default:
             return state;
     }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text, FlatList, Platform } from 'react-native'
+import { View, StyleSheet, Text, FlatList, Platform, } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 
 import * as UserDataActions from '../store/actions/userData'
@@ -16,7 +16,7 @@ const TaskScreen = props => {
 
 
     const loadTasksData = async () => {
-        dispatch(UserDataActions.refreshUser(userToken))//
+        dispatch(UserDataActions.refreshUser(userToken))
         setIsRefreshing(true);
         try {
             const res = await fetch(
@@ -56,9 +56,9 @@ const TaskScreen = props => {
             ListHeaderComponent={<View>
                 <PageHeader username={userData.username} balance={userData.balance}></PageHeader>
                 <View>
-                    <Text style={{ fontWeight: 'bold', fontFamily: 'Avenir', fontSize: 20 }}>Available Tasks</Text>
+                    <Text style={{ fontWeight: 'bold', fontFamily: 'Avenir', fontSize: 20, marginLeft: 10 }}>Available Tasks</Text>
                     <TaskItem
-                        onPress={() => { handleTaskPress('REFERRAL') }}
+                        onPress={() => (console.log("handleRewardSelect(item)"))}
                         offerName={"Refer A Friend!"}
                         offerDescription={"Invite your friends and earn 15% of their coin earnings!"}
                         offerAmount={"Unlimited"}

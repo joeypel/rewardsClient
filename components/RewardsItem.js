@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -9,7 +8,9 @@ import {
   Platform
 } from 'react-native';
 
-import Card from './Card';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+
+
 
 const RewardsItem = props => {
   let TouchableCmp = TouchableOpacity;
@@ -19,24 +20,30 @@ const RewardsItem = props => {
   }
 
   return (
-    <Card style={styles.product}>
-      <View style={styles.touchable}>
-        <TouchableCmp onPress={props.onSelect} useForeground>
-          <View>
-            <View style={styles.imageContainer}>
-              {props.image ? <Image style={styles.image} source={{ uri: props.image }} /> : <Image style={styles.image} source={{ uri: ('https://via.placeholder.com/350x150') }} />}
-            </View>
-            <View style={styles.details}>
-              <Text style={styles.title}>{props.title}</Text>
-              <Text style={styles.price}>{props.price} Points</Text>
-            </View>
-            <View style={styles.actions}>
-              {props.children}
-            </View>
-          </View>
-        </TouchableCmp>
-      </View>
-    </Card>
+    <Content>
+      <Card>
+        <CardItem>
+          <Left>
+            {/* <Thumbnail source={{ uri: 'Image URL' }} /> */}
+            <Body>
+              <Text>{props.title}</Text>
+              <Text note>{props.price} Coins</Text>
+            </Body>
+          </Left>
+        </CardItem>
+        <CardItem cardBody>
+          <Image source={{ uri: props.image }} style={{ height: 150, width: '100%', }} />
+        </CardItem>
+        <CardItem>
+          <Body>
+            <Button iconLeft full>
+              <Icon active name="ios-cash" />
+              <Text>Redeem now!</Text>
+            </Button>
+          </Body>
+        </CardItem>
+      </Card>
+    </Content>
   );
 };
 
@@ -58,8 +65,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   image: {
-    width: '100%',
-    height: '100%'
+    // width: '100%',
+    // height: '100%'
   },
   details: {
     alignItems: 'center',

@@ -9,8 +9,9 @@ const PageHeader = props => {
             <Thumbnail square source={{ uri: 'https://hedgebetcalculator.com/services/public/img/profile.png' }} />
         </Left>
         <Body>
-            <Text>{props.username}</Text>
-            <Text note numberOfLines={1}>Balance: {props.balance}</Text>
+            <View><Text numberOfLines={1}>Balance: {props.balance} coins</Text></View>
+            <Text note>{props.username}</Text>
+
         </Body>
         <Right>
             <Button transparent>

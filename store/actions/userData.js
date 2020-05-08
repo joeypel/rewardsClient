@@ -24,8 +24,13 @@ export const refreshUser = (token) => {
         }
 
         const resData = await response.json();
-        console.log(resData)
         dispatch({ type: 'REFRESHUSER', username: resData.email, balance: resData.balance, userID: resData._id }
         );
     };
+}
+
+export const logOutUser = () => {
+    return async dispatch => {
+        dispatch({ type: 'LOGOUT' })
+    }
 }
