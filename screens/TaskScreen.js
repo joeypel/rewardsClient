@@ -30,12 +30,20 @@ const TaskScreen = props => {
                     },
                 }
             );
+            if (await res.ok) {
+                setTaskData(await res.json());
 
-            setTaskData(await res.json());
+            }
+            else {
+                console.log('error loading tasks')
+
+            }
+
         } catch (err) {
-            console.log(err)
+            // console.log(err)
         }
         setIsRefreshing(false);
+
     }
 
     useEffect(() => {
@@ -48,32 +56,35 @@ const TaskScreen = props => {
     }
 
 
+
     return (
-        // <Text>hey</Text>
-        <FlatList
-            data={taskData}
-            keyExtractor={item => item.offer_id}
-            ListHeaderComponent={<View>
-                <PageHeader username={userData.username} balance={userData.balance}></PageHeader>
-                <View>
-                    <Text style={{ fontWeight: 'bold', fontFamily: 'Avenir', fontSize: 20, marginLeft: 10 }}>Available Tasks</Text>
-                    <TaskItem
-                        onPress={() => (console.log("handleRewardSelect(item)"))}
-                        offerName={"Refer A Friend!"}
-                        offerDescription={"Invite your friends and earn 15% of their coin earnings!"}
-                        offerAmount={"Unlimited"}
-                        image={'holder'}></TaskItem>
-                </View></View>}
-            onRefresh={() => loadTasksData()}
-            refreshing={isRefreshing}
-            renderItem={({ item }) => (<TaskItem
-                onPress={() => { handleTaskPress(item) }}
-                offerName={item.offer_name}
-                offerDescription={item.offer_desc}
-                offerAmount={item.amount}
-                image={item.image_url_220x124}
-            ></TaskItem>)}
-        ></FlatList >
+        <View style={{ flex: 1 }}>
+            <FlatList
+                data={taskData}
+                keyExtractor={item => item.offer_id}
+                ListHeaderComponent={
+                    <View>
+                        <PageHeader username={userData.username} balance={userData.balance}></PageHeader>
+                        <View>
+                            <Text style={{ fontWeight: 'bold', fontFamily: 'Avenir', fontSize: 20, marginLeft: 10 }}>Available Tasks</Text>
+                            <TaskItem
+                                onPress={() => (console.log("handleRewardSelect(item)"))}
+                                offerName={"Refer A Friend!"}
+                                offerDescription={"Invite your friends and earn 15% of their coin earnings!"}
+                                offerAmount={"Unlimited"}
+                                image={'holder'}></TaskItem>
+                        </View></View>}
+                onRefresh={() => loadTasksData()}
+                refreshing={isRefreshing}
+                renderItem={({ item }) => (<TaskItem
+                    onPress={() => { handleTaskPress(item) }}
+                    offerName={item.offer_name}
+                    offerDescription={item.offer_desc}
+                    offerAmount={item.amount}
+                    image={item.image_url_220x124}
+                ></TaskItem>)}
+            ></FlatList >
+        </View>
     )
 }
 

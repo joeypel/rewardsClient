@@ -128,7 +128,7 @@ const AuthScreen = props => {
             />
             <Input
               id="password"
-              label="password"
+              label="Password"
               keyboardType="default"
               secureTextEntry
               required

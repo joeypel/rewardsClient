@@ -83,7 +83,7 @@ const AccountScreen = props => {
                         <Icon name="arrow-forward" />
                     </Right>
                 </ListItem>
-                <ListItem>
+                <ListItem onPress={() => props.navigation.navigate('Rewards', { userToken: userToken })}>
                     <Left>
                         <Text>Rewards History</Text>
                     </Left>
@@ -121,7 +121,12 @@ const AccountScreen = props => {
                     <Text>Terms of Service</Text>
                 </ListItem>
                 <ListItem last onPress={() => Linking.openURL("mailto:support@example.com")}>
-                    <Text>Contact us! </Text>
+                    <Left>
+                        <Text>Contact Us!</Text>
+                    </Left>
+                    <Right>
+                        <Icon name="mail" />
+                    </Right>
                 </ListItem>
             </Content>
 

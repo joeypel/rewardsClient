@@ -34,8 +34,13 @@ const RewardsScreen = props => {
     }
 
     const handleRewardSelect = item => {
-        // fetch('https://hedgebetcalculator.com/services/rewardredeem')
-        console.log("make post request to redeem item:" + item.title)
+        fetch('https://hedgebetcalculator.com/services/redeem', {
+            method: 'POST', headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                token: userToken,
+            },
+        })
     }
 
     useEffect(() => {

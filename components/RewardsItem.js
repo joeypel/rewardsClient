@@ -36,7 +36,7 @@ const RewardsItem = props => {
         </CardItem>
         <CardItem>
           <Body>
-            <Button iconLeft full>
+            <Button iconLeft full onPress={props.onSelect}>
               <Icon active name="ios-cash" />
               <Text>Redeem now!</Text>
             </Button>
