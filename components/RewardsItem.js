@@ -27,19 +27,28 @@ const RewardsItem = props => {
             {/* <Thumbnail source={{ uri: 'Image URL' }} /> */}
             <Body>
               <Text>{props.title}</Text>
-              <Text note>{props.price} Coins</Text>
+              {/* <Text note>{props.amountRedeemed} Redeemed!</Text> */}
+              <Text note>{0} claimed all time!</Text>
             </Body>
           </Left>
         </CardItem>
         <CardItem cardBody>
-          <Image source={{ uri: props.image }} style={{ height: 150, width: '100%', }} />
+          <Image source={{ uri: props.image }} style={{ height: 125, width: '100%', resizeMode: 'contain' }} />
         </CardItem>
         <CardItem>
-          <Body>
-            <Button iconLeft full onPress={props.onSelect}>
-              <Icon active name="ios-cash" />
-              <Text>Redeem now!</Text>
+          <Body style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Button transparent onPress={props.onSelect}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon active name="ios-cash" />
+                <Text>Redeem now!</Text>
+              </View>
+
+
             </Button>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              {/* <Icon active name="ios-cash" /> */}
+              <Text>{props.price} Coins</Text>
+            </View>
           </Body>
         </CardItem>
       </Card>

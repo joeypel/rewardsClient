@@ -99,7 +99,7 @@ const AccountScreen = props => {
                         <Icon name="arrow-forward" />
                     </Right>
 
-                </ListItem>
+                </ListItem >
                 <ListItem last onPress={() => { toggleModal() }}>
                     <Left>
                         <Text>Log Out</Text>
@@ -111,13 +111,13 @@ const AccountScreen = props => {
                 <Separator bordered>
                     <Text>Information</Text>
                 </Separator>
-                <ListItem>
+                <ListItem onPress={() => props.navigation.navigate('HowItWorks')}>
                     <Text>How it Works</Text>
                 </ListItem>
-                <ListItem>
+                <ListItem onPress={() => props.navigation.navigate('Privacy')}>
                     <Text>Privacy Policy</Text>
                 </ListItem>
-                <ListItem>
+                <ListItem onPress={() => props.navigation.navigate('Terms')}>
                     <Text>Terms of Service</Text>
                 </ListItem>
                 <ListItem last onPress={() => Linking.openURL("mailto:support@example.com")}>

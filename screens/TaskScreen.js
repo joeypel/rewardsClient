@@ -35,12 +35,12 @@ const TaskScreen = props => {
 
             }
             else {
-                console.log('error loading tasks')
+                throw new Error('Error getting tasks')
 
             }
 
         } catch (err) {
-            // console.log(err)
+            console.log(err)
         }
         setIsRefreshing(false);
 
@@ -89,9 +89,3 @@ const TaskScreen = props => {
 }
 
 export default TaskScreen
-
-
-// let x = Object.values(taskData)
-// let y = [1, 2, 3]
-// console.log(new Map(Object.entries(taskData)))
-// console.log(x.get("6500"))

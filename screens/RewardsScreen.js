@@ -25,7 +25,6 @@ const RewardsScreen = props => {
                     },
                 }
             );
-
             setRewardsData(await res.json());
         } catch (err) {
             console.log(err)
@@ -53,7 +52,9 @@ const RewardsScreen = props => {
         <FlatList
             data={rewardsData}
             ListHeaderComponent={<PageHeader username={userData.username} balance={userData.balance}></PageHeader>}
-            keyExtractor={item => Math.random().toString()}
+            keyExtractor={item => item.title}
+            onRefresh={() => loadRewardsData()}
+            refreshing={isRefreshing}
             renderItem={({ item }) => (
                 <RewardsItem title={item.title} price={item.price} image={item.image} onSelect={() => handleRewardSelect(item)}></RewardsItem>
             )}
@@ -62,6 +63,3 @@ const RewardsScreen = props => {
 }
 
 export default RewardsScreen
-
-// console.log(new Map(Object.entries(taskData)))
-// console.log(x.get("6500"))

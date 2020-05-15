@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
-import AppIntroSlider from 'react-native-app-intro-slider';
+
 
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -11,6 +10,8 @@ import TaskStack from '../stacks/TaskStack';
 import RewardsStack from '../stacks/RewardsStack'
 import AccountStack from '../stacks/AccountStack'
 import AuthScreen from '../screens/AuthScreen'
+
+import TutorialSlider from '../components/TutorialSlider'
 
 const BottomTab = createBottomTabNavigator();
 
@@ -23,15 +24,9 @@ export default function BottomTabNavigator({ navigation, route }) {
 
 
   if (!userToken && introShowing) {
-    // return (<AuthScreen></AuthScreen>)
+
     return (
-      <AppIntroSlider renderItem={({ item }) => {
-        console.log(item)
-        return (<View style={{ backgroundColor: item.backgroundColor, flex: 1 }}>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.text}>{item.text}</Text>
-        </View>)
-      }} data={slides} onDone={() => setIntroShowing(false)} />
+      <TutorialSlider onDone={() => setIntroShowing(false)}></TutorialSlider>
     )
 
   }
@@ -71,28 +66,4 @@ export default function BottomTabNavigator({ navigation, route }) {
 
 }
 
-const slides = [
-  {
-    key: 1,
-    title: 'Title 1',
-    text: 'Description.\nSay something cool',
-    // image: require('./assets/1.jpg'),
-    backgroundColor: '#59b2ab',
-  },
-  {
-    key: 2,
-    title: 'Title 2',
-    text: 'Other cool stuff',
-    // image: require('./assets/2.jpg'),
-    backgroundColor: '#febe29',
-  },
-  {
-    key: 3,
-    title: 'Rocket guy',
-    text: 'I\'m already out of descriptions\n\nLorem ipsum bla bla bla',
-    // image: require('./assets/3.jpg'),
-    backgroundColor: '#22bcb5',
-  }
-];
 
-const styles = StyleSheet.create({})
