@@ -112,7 +112,7 @@ const AuthScreen = props => {
       style={styles.screen}
     >
       <LinearGradient colors={['#003f5c', '#00AFFF']} style={styles.gradient}>
-        <Text style={styles.logo}>Rewards</Text>
+        <Text style={styles.logo}>Rewards Plus</Text>
         <Card style={styles.authContainer}>
           <ScrollView>
             <Input
