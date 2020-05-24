@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { View, FlatList, Text, StyleSheet } from 'react-native'
+import { View, FlatList, StyleSheet, } from 'react-native'
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
 
 
 
 const EarningHistoryScreen = props => {
 
     const [history, setHistory] = useState([])
+    const [isRefreshing, setIsRefreshing] = useState(false)
     const fetchHistory = async () => {
+        setIsRefreshing(true)
         const response = await fetch('https://hedgebetcalculator.com/services/offerhistory', {
             method: 'GET', headers: {
                 Accept: 'application/json',
@@ -15,28 +18,41 @@ const EarningHistoryScreen = props => {
             }
         })
         setHistory(await response.json())
+        setIsRefreshing(false)
     }
-
-
 
     useEffect(() => {
         fetchHistory()
     }, [])
 
 
-    return (<FlatList
-        data={history}
-        keyExtractor={item => Math.random().toString()}
-        renderItem={({ item }) => (
-            <View style={{ margin: 5, borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text>item.offerName</Text><Text>+{item.offerAmount}</Text></View>
-
-                <Text>{item.createdAt}</Text>
+    if (history.length === 0 && !isRefreshing) {
+        return (
+            <View>
+                <Text>No offers have been completed yet!</Text>
+                <Button onPress={() => fetchHistory()}><Text>Retry!</Text></Button>
             </View>
-        )}
-    ></FlatList >)
+        )
+    }
 
-    // return (<Text>Hey</Text>)
+    return (
+        <List style={{ flex: 1 }}><FlatList
+            data={history}
+            keyExtractor={item => Math.random().toString()}
+            renderItem={({ item }) => (
+                <ListItem>
+                    <Body>
+                        <Text>{JSON.stringify(item.offerName)}</Text>
+                        <Text note numberOfLines={1}>ID:{item.offerID}</Text>
+                        <Text note numberOfLines={1}>{JSON.stringify(item.createdAt)}</Text>
+                    </Body>
+                    <Right>
+                        <Text>+{item.offerAmount} coins</Text>
+                    </Right>
+                </ListItem>
+            )}
+        ></FlatList >
+        </List>)
 }
 
 export default EarningHistoryScreen

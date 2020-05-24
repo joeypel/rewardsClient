@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text, FlatList, Platform, } from 'react-native'
+import { View, StyleSheet, Text, FlatList, Platform, TouchableOpacity } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 
 import * as UserDataActions from '../store/actions/userData'
@@ -10,6 +10,7 @@ import PageHeader from '../components/PageHeader'
 const TaskScreen = props => {
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [taskData, setTaskData] = useState([]);
+    const [sortType, setSortType] = useState('Coins↓')
     const userToken = useSelector(state => state.auth.token);
     const userData = useSelector(state => state.user);
     const dispatch = useDispatch();
@@ -35,7 +36,9 @@ const TaskScreen = props => {
 
             }
             else {
+                setIsRefreshing(false);
                 throw new Error('Error getting tasks')
+
 
             }
 
@@ -55,24 +58,42 @@ const TaskScreen = props => {
         props.navigation.navigate('Task Info', { taskData, userData })
     }
 
+    const sortedTasks = tasks => {
+        if (sortType === 'Coins↓') {
+            return tasks.sort((a, b) => b.amount - a.amount)
+        }
+        else if (sortType === 'Coins↑') {
+            return tasks.sort((a, b) => a.amount - b.amount)
+        }
+        else if (sortType === 'A-Z') {
+            return tasks.sort((a, b) => b.offer_name.toUpperCase() < a.offer_name.toUpperCase())
+        }
+    }
+
+    const cycleSortType = () => {
+        const sortTypes = ["Coins↓", "Coins↑", "A-Z"]
+        //checks if sort type is part of this array above, if not, start at the beginning
+        setSortType(sortTypes[sortTypes.indexOf(sortType) + 1] ? sortTypes[sortTypes.indexOf(sortType) + 1] : 'Coins↓')
+    }
 
 
     return (
         <View style={{ flex: 1 }}>
             <FlatList
-                data={taskData}
+                data={sortedTasks(taskData)}
                 keyExtractor={item => item.offer_id}
                 ListHeaderComponent={
                     <View>
                         <PageHeader username={userData.username} balance={userData.balance}></PageHeader>
-                        <View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontWeight: 'bold', fontFamily: 'Avenir', fontSize: 20, marginLeft: 10 }}>Available Tasks</Text>
-                            <TaskItem
+                            <TouchableOpacity onPress={() => { cycleSortType() }}><Text style={{ fontWeight: 'normal', fontFamily: 'Avenir', fontSize: 14, marginLeft: 10 }}>Sort: {sortType}</Text></TouchableOpacity>
+                            {/* <TaskItem
                                 onPress={() => (console.log("handleRewardSelect(item)"))}
                                 offerName={"Refer A Friend!"}
                                 offerDescription={"Invite your friends and earn 15% of their coin earnings!"}
                                 offerAmount={"Unlimited"}
-                                image={'holder'}></TaskItem>
+                                image={'holder'}></TaskItem> */}
                         </View></View>}
                 onRefresh={() => loadTasksData()}
                 refreshing={isRefreshing}

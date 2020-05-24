@@ -1,12 +1,8 @@
 {
   "expo": {
-    "name": "rewardsPro",
-    "slug": "rewardsPro",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "name": "Rewards Plus",
+    "slug": "rewardsPlus",
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,11 +15,14 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "1",
+      "bundleIdentifier": "io.rewardsPlus",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~1458002511"
+      }
     }
   }
 }

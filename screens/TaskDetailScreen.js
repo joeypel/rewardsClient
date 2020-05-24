@@ -8,34 +8,10 @@ import Chip from '../components/Chip'
 const TaskDetailScreen = ({ navigation, route }) => {
 
     const handleTaskStartPress = async url => {
-
-        Linking.openURL(url.replace('[USER_ID]', route.params.userData.userID))
-        // console.log(url)
+        let newURL = url.replace('[USER_ID]', route.params.userData.userID).replace('{playerid}', route.params.userData.userID)
+        // Linking.openURL(url.replace('[USER_ID]', route.params.userData.userID))
+        console.log(newURL)
     }
-
-    // return (
-    //     <View style={styles.main}>
-    //         <View style={styles.top}>
-    //             <View style={styles.imageContainer}>
-    //                 <Image
-    //                     style={styles.image}
-    //                     source={{
-    //                         uri: route.params.taskData.image_url,
-    //                     }}
-    //                 />
-    //             </View>
-    //             <View style={{ alignItems: 'center', margin: 10, flex: 3 }}><Text>{route.params.taskData.offer_name}</Text>
-    //                 <Chip text={"+" + route.params.taskData.amount}></Chip></View>
-    //         </View>
-    //         <View style={styles.bottom}>
-    //             <Text style={styles.descriptionTitle}>Description</Text>
-    //             <Text>{route.params.taskData.offer_desc}</Text>
-    //             <Text style={styles.descriptionTitle}>Instructions</Text>
-    //             <Text>{route.params.taskData.call_to_action}</Text>
-    //             <Button title="Start Task" onPress={() => handleTaskStartPress(route.params.taskData.offer_url)}></Button>
-    //         </View>
-    //     </View >
-    // )
     return (
         <Content>
             <Card style={{ flex: 0 }}>
@@ -50,13 +26,12 @@ const TaskDetailScreen = ({ navigation, route }) => {
                 </CardItem>
                 <CardItem>
                     <Body>
-                        <Image source={{ uri: route.params.taskData.image_url }} style={{ height: 150, width: 150, flex: 1, alignSelf: 'center', overflow: 'hidden', borderRadius: 10 }} />
+                        <Image source={{ uri: route.params.taskData.image_url_220x124 }} style={{ height: 150, width: 150, flex: 1, alignSelf: 'center', overflow: 'hidden', borderRadius: 10 }} />
                         <Text style={styles.descriptionTitle}>Description</Text>
                         <Text>{route.params.taskData.offer_desc}</Text>
                         <Text style={styles.descriptionTitle}>Instructions</Text>
                         <Text>{route.params.taskData.call_to_action}</Text>
-                        <Text style={styles.descriptionTitle}>Disclaimer</Text>
-                        <Text>{route.params.taskData.disclaimer}</Text>
+                        {route.params.taskData.disclaimer ? (<View><Text style={styles.descriptionTitle}>Disclaimer</Text><Text>{route.params.taskData.disclaimer}</Text></View>) : null}
                     </Body>
                 </CardItem>
                 <CardItem style={{ justifyContent: 'center' }}>

@@ -38,18 +38,7 @@ const RewardsScreen = props => {
         if (userData.balance < item.price) {
             setModalVisible(true)
         } else {
-            fetch('https://hedgebetcalculator.com/services/redeem', {
-                method: 'POST', headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    token: userToken,
-                },
-                body: JSON.stringify(item)
-            })
-                .then(response => response.json())
-                .then((json) => {
-                    setModalVisible(true)
-                }).catch(err => console.log(err))
+            props.navigation.navigate("Confirm Reward", item)
         }
     }
 
