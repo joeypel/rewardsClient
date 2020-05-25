@@ -7,6 +7,7 @@ import { Container, Header, Content, List, ListItem, Text, Separator, Thumbnail,
 import PageHeader from '../components/PageHeader'
 
 import * as UserDataActions from '../store/actions/userData'
+import * as OfferActions from '../store/actions/offers'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const AccountScreen = props => {
@@ -29,6 +30,10 @@ const AccountScreen = props => {
         dispatch(UserDataActions.logOutUser())
     }
 
+    const unhideOffers = () => {
+        dispatch(OfferActions.unhideAllOffers())
+    }
+
 
 
     if (userToken) {
@@ -49,7 +54,7 @@ const AccountScreen = props => {
 
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <Text>Really log out?</Text>
+                            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Really log out?</Text>
                             <TouchableHighlight
                                 style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                                 onPress={() => {
@@ -100,6 +105,14 @@ const AccountScreen = props => {
                     </Right>
 
                 </ListItem >
+                <ListItem onPress={() => { unhideOffers() }}>
+                    <Left>
+                        <Text>Unhide Offers</Text>
+                    </Left>
+                    <Right>
+                        <Icon name="arrow-forward" />
+                    </Right>
+                </ListItem>
                 <ListItem last onPress={() => { toggleModal() }}>
                     <Left>
                         <Text>Log Out</Text>

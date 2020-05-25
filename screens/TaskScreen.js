@@ -13,6 +13,7 @@ const TaskScreen = props => {
     const [sortType, setSortType] = useState('Coins↓')
     const userToken = useSelector(state => state.auth.token);
     const userData = useSelector(state => state.user);
+    const offers = useSelector(state => state.offers)
     const dispatch = useDispatch();
 
 
@@ -70,6 +71,14 @@ const TaskScreen = props => {
         }
     }
 
+    const removeHiddenTasks = tasks => {
+        // console.log(tasks)
+        return tasks.filter(item => !offers.hidden.includes(item.offer_name))
+        // return tasks.filter(item => offers.hidden.includes(item.name))
+    }
+
+
+
     const cycleSortType = () => {
         const sortTypes = ["Coins↓", "Coins↑", "A-Z"]
         //checks if sort type is part of this array above, if not, start at the beginning
@@ -80,7 +89,7 @@ const TaskScreen = props => {
     return (
         <View style={{ flex: 1 }}>
             <FlatList
-                data={sortedTasks(taskData)}
+                data={removeHiddenTasks(sortedTasks(taskData))}
                 keyExtractor={item => item.offer_id}
                 ListHeaderComponent={
                     <View>
@@ -88,13 +97,15 @@ const TaskScreen = props => {
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontWeight: 'bold', fontFamily: 'Avenir', fontSize: 20, marginLeft: 10 }}>Available Tasks</Text>
                             <TouchableOpacity onPress={() => { cycleSortType() }}><Text style={{ fontWeight: 'normal', fontFamily: 'Avenir', fontSize: 14, marginLeft: 10 }}>Sort: {sortType}</Text></TouchableOpacity>
-                            {/* <TaskItem
-                                onPress={() => (console.log("handleRewardSelect(item)"))}
-                                offerName={"Refer A Friend!"}
-                                offerDescription={"Invite your friends and earn 15% of their coin earnings!"}
-                                offerAmount={"Unlimited"}
-                                image={'holder'}></TaskItem> */}
-                        </View></View>}
+
+                        </View>
+                        {/* <TaskItem
+                            onPress={() => (console.log("handleRewardSelect(item)"))}
+                            offerName={"Refer A Friend!"}
+                            offerDescription={"Invite your friends and earn 15% of their coin earnings!"}
+                            offerAmount={"Unlimited"}
+                            image={'holder'}></TaskItem> */}
+                    </View>}
                 onRefresh={() => loadTasksData()}
                 refreshing={isRefreshing}
                 renderItem={({ item }) => (<TaskItem

@@ -28,9 +28,9 @@ const EarningHistoryScreen = props => {
 
     if (history.length === 0 && !isRefreshing) {
         return (
-            <View>
-                <Text>No offers have been completed yet!</Text>
-                <Button onPress={() => fetchHistory()}><Text>Retry!</Text></Button>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ marginVertical: 10 }}>No offers have been completed yet!</Text>
+                <Button block rounded onPress={() => fetchHistory()}><Text>Retry!</Text></Button>
             </View>
         )
     }
@@ -47,7 +47,7 @@ const EarningHistoryScreen = props => {
                         <Text note numberOfLines={1}>{JSON.stringify(item.createdAt)}</Text>
                     </Body>
                     <Right>
-                        <Text>+{item.offerAmount} coins</Text>
+                        <Text numberOfLines={1}>+{item.offerAmount} coins</Text>
                     </Right>
                 </ListItem>
             )}

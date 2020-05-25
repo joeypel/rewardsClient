@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Image, Linking } from 'react-native'
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
+import { View, StyleSheet, Image, TouchableOpacity, ImagePropTypes } from 'react-native'
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Right, Body } from 'native-base';
 
+import * as offerActions from '../store/actions/offers'
 import Chip from '../components/Chip'
+import { useSelector, useDispatch } from 'react-redux'
 
-
-const TaskDetailScreen = ({ navigation, route }) => {
-
+const TaskDetailScreen = ({ navigation, route, hideOfferHandler }) => {
+    const dispatch = useDispatch();
+    const [hidden, setIsHidden] = useState(false);
     const handleTaskStartPress = async url => {
         let newURL = url.replace('[USER_ID]', route.params.userData.userID).replace('{playerid}', route.params.userData.userID)
         // Linking.openURL(url.replace('[USER_ID]', route.params.userData.userID))
@@ -20,8 +22,21 @@ const TaskDetailScreen = ({ navigation, route }) => {
                         <Thumbnail source={{ uri: 'https://hedgebetcalculator.com/services/public/img/profile.png' }} />
                         <Body>
                             <Text style={{ fontWeight: 'bold' }}>{route.params.taskData.offer_name}</Text>
-                            <Text note>{new Date().toLocaleString()}</Text>
+                            <Text note>{new Date().toUTCString().slice(0, 16)}</Text>
                         </Body>
+                        <Right>
+                            {hidden ? <TouchableOpacity onPress={() => {
+                                setIsHidden(false);
+                                dispatch(offerActions.unhideOffer(route.params.taskData.offer_name))
+                            }}>
+                                <Text note>Unhide Offer</Text>
+                            </TouchableOpacity> : <TouchableOpacity onPress={() => {
+                                setIsHidden(true);
+                                dispatch(offerActions.addHiddenOffer(route.params.taskData.offer_name))
+                            }}>
+                                    <Text note>Hide Offer</Text>
+                                </TouchableOpacity>}
+                        </Right>
                     </Left>
                 </CardItem>
                 <CardItem>

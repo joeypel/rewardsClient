@@ -49,7 +49,7 @@ const RewardsScreen = props => {
 
 
     return (
-        <View>
+        <View style={{ flex: 1 }}>
             <Modal
                 animationType="slide"
                 transparent={true}

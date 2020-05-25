@@ -18,10 +18,12 @@ const Stack = createStackNavigator();
 
 import authReducer from './store/reducers/auth'
 import userDataReducer from './store/reducers/userData'
+import offersReducer from './store/reducers/offers'
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  user: userDataReducer
+  user: userDataReducer,
+  offers: offersReducer
 })
 
 const persistConfig = {
