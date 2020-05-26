@@ -23,7 +23,7 @@ const TaskItem = props => {
 const styles = StyleSheet.create({
     content: { marginTop: 10, alignItems: 'center', justifyContent: 'space-around', minHeight: 100, },
 
-    text: { fontFamily: 'Avenir', fontSize: 18 },
-    tasksText: { fontWeight: 'bold', fontFamily: 'Avenir', fontSize: 20 }
+    text: { fontFamily: 'Roboto', fontSize: 18 },
+    tasksText: { fontWeight: 'bold', fontFamily: 'Roboto', fontSize: 20 }
 })
 export default TaskItem

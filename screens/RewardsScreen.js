@@ -77,10 +77,11 @@ const RewardsScreen = props => {
                 onRefresh={() => loadRewardsData()}
                 refreshing={isRefreshing}
                 renderItem={({ item }) => (
-                    <RewardsItem title={item.title} price={item.price} image={item.image} onSelect={() => handleRewardSelect(item)}></RewardsItem>
+
+                    <RewardsItem title={item.title} price={item.price} image={item.image} onSelect={() => handleRewardSelect(item)} amountRedeemed={item.amountRedeemed}></RewardsItem>
                 )}
             ></FlatList >
-        </View>
+        </View >
     )
 }
 

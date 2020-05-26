@@ -28,7 +28,7 @@ const RewardsItem = props => {
             <Body>
               <Text>{props.title}</Text>
               {/* <Text note>{props.amountRedeemed} Redeemed!</Text> */}
-              <Text note>{0} claimed all time!</Text>
+              <Text note>{props.amountRedeemed} claimed all time!</Text>
             </Body>
           </Left>
         </CardItem>

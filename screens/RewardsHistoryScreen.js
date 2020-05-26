@@ -28,7 +28,7 @@ const EarningHistoryScreen = props => {
     }, [])
 
     const handleRewardSelect = reward => {
-        setModalData(reward.code)
+        setModalData(reward)
         setModalVisible(true)
     }
 
@@ -46,7 +46,7 @@ const EarningHistoryScreen = props => {
     return (
         <View style={{ flex: 1 }}>
             <Modal
-                animationType="fade"
+                animationType="slide"
                 transparent={true}
                 visible={modalVisible}
             >
@@ -55,7 +55,8 @@ const EarningHistoryScreen = props => {
                     <View style={styles.modalView}>
                         <Image source={require('../assets/images/coins.png')} style={styles.image} />
                         <Text style={{ fontWeight: 'bold', fontSize: 24 }}>Here is your reward!</Text>
-                        <Text style={{ textAlign: 'center', marginVertical: 15 }}>{modalData}</Text>
+                        <Text style={{ textAlign: 'center', marginVertical: 5, fontSize: 18 }}>{modalData.rewardType}</Text>
+                        <Text style={{ textAlign: 'center', marginVertical: 15 }}>{modalData.code}</Text>
                         <Button full rounded onPress={() => setModalVisible(false)}>
                             <Text style={styles.textStyle}>OK</Text>
                         </Button>
@@ -71,7 +72,7 @@ const EarningHistoryScreen = props => {
                     }}>
                         <Body>
                             <Text>{item.rewardType}</Text>
-                            <Text note numberOfLines={1}>Status: {item.fulfilled ? "Complete, tap to view code!" : "Pending, please wait 24-48 hours"}</Text>
+                            {item.fulfilled ? <Text style={{ color: 'green' }}>Complete, tap to view code!</Text> : <Text note>Pending, please wait 24-48 hours</Text>}
                             <Text note numberOfLines={1}>{JSON.stringify(item.createdAt)}</Text>
                         </Body>
                         <Right>

@@ -95,8 +95,8 @@ const TaskScreen = props => {
                     <View>
                         <PageHeader username={userData.username} balance={userData.balance}></PageHeader>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontWeight: 'bold', fontFamily: 'Avenir', fontSize: 20, marginLeft: 10 }}>Available Tasks</Text>
-                            <TouchableOpacity onPress={() => { cycleSortType() }}><Text style={{ fontWeight: 'normal', fontFamily: 'Avenir', fontSize: 14, marginLeft: 10 }}>Sort: {sortType}</Text></TouchableOpacity>
+                            <Text style={{ fontWeight: 'bold', fontFamily: 'Roboto', fontSize: 20, marginLeft: 10 }}>Available Tasks</Text>
+                            <TouchableOpacity onPress={() => { cycleSortType() }}><Text style={{ fontWeight: 'normal', fontFamily: 'Roboto', fontSize: 14, marginLeft: 10 }}>Sort: {sortType}</Text></TouchableOpacity>
 
                         </View>
                         {/* <TaskItem
