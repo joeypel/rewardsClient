@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Image, TouchableOpacity, ImagePropTypes } from 'react-native'
+import { View, StyleSheet, Image, TouchableOpacity, Linking } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Right, Body } from 'native-base';
 
 import * as offerActions from '../store/actions/offers'
@@ -11,9 +11,10 @@ const TaskDetailScreen = ({ navigation, route, hideOfferHandler }) => {
     const [hidden, setIsHidden] = useState(false);
     const handleTaskStartPress = async url => {
         let newURL = url.replace('[USER_ID]', route.params.userData.userID).replace('{playerid}', route.params.userData.userID)
-        // Linking.openURL(url.replace('[USER_ID]', route.params.userData.userID))
-        console.log(newURL)
+        Linking.openURL(newURL)
+        // console.log(newURL)
     }
+    console.log(route.params.taskData)
     return (
         <Content>
             <Card style={{ flex: 0 }}>
@@ -22,6 +23,8 @@ const TaskDetailScreen = ({ navigation, route, hideOfferHandler }) => {
                         <Thumbnail source={{ uri: 'https://hedgebetcalculator.com/services/public/img/profile.png' }} />
                         <Body>
                             <Text style={{ fontWeight: 'bold' }}>{route.params.taskData.offer_name}</Text>
+
+                            <Text note>+{route.params.taskData.amount} Coins</Text>
                             <Text note>{new Date().toUTCString().slice(0, 16)}</Text>
                         </Body>
                         <Right>

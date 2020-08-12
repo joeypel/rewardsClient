@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text, FlatList, Platform, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, FlatList, Platform, TouchableOpacity, ScrollView, Button } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 
 import * as UserDataActions from '../store/actions/userData'
@@ -85,6 +85,24 @@ const TaskScreen = props => {
         setSortType(sortTypes[sortTypes.indexOf(sortType) + 1] ? sortTypes[sortTypes.indexOf(sortType) + 1] : 'Coins↓')
     }
 
+    if (removeHiddenTasks(taskData).length === 0 && !isRefreshing) {
+        return (
+            <View style={{ flex: 1 }}>
+                <ScrollView>
+                    <View>
+                        <PageHeader username={userData.username} balance={userData.balance}></PageHeader>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ fontWeight: 'bold', fontFamily: 'Roboto', fontSize: 20, marginLeft: 10 }}>Available Tasks</Text>
+                            <TouchableOpacity onPress={() => { cycleSortType() }}><Text style={{ fontWeight: 'normal', fontFamily: 'Roboto', fontSize: 14, marginLeft: 10 }}>Sort: {sortType}</Text></TouchableOpacity>
+
+                        </View>
+                    </View>
+                    <Text style={{ textAlign: 'center' }}>No tasks available at the moment!</Text>
+                    <Button title="Refresh!" onPress={() => loadTasksData()}></Button>
+                </ScrollView>
+            </View>
+        )
+    }
 
     return (
         <View style={{ flex: 1 }}>
@@ -119,5 +137,6 @@ const TaskScreen = props => {
         </View>
     )
 }
+
 
 export default TaskScreen

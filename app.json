@@ -21,7 +21,14 @@
       "buildNumber": "1",
       "bundleIdentifier": "io.rewardsPlus",
       "config": {
-        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~1458002511"
+        "googleMobileAdsAppId": "ca-app-pub-2960114332907260~8789600171"
+      }
+    },
+    "android": {
+      "package": "com.techforsure.rewardsPlus",
+      "versionCode": 1,
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-2960114332907260~8789600171"
       }
     }
   }

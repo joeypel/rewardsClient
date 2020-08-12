@@ -3,12 +3,19 @@ import { View, StyleSheet, FlatList, TouchableOpacity, TouchableHighlight, Linki
 import { useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
 import { Container, Header, Content, List, ListItem, Text, Separator, Thumbnail, Left, Body, Right, Button, Icon } from 'native-base';
+import {
+    AdMobBanner,
+    AdMobInterstitial,
+    PublisherBanner,
+    AdMobRewarded,
+    setTestDeviceIDAsync,
+} from 'expo-ads-admob';
+
 
 import PageHeader from '../components/PageHeader'
 
 import * as UserDataActions from '../store/actions/userData'
 import * as OfferActions from '../store/actions/offers'
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const AccountScreen = props => {
     const userToken = useSelector(state => state.auth.token)
@@ -16,6 +23,7 @@ const AccountScreen = props => {
     const dispatch = useDispatch();
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [unhideModalVisible, setUnhideModalVisible] = useState(false);
 
     useEffect(() => {
         dispatch(UserDataActions.refreshUser(userToken))//
@@ -37,8 +45,6 @@ const AccountScreen = props => {
 
 
     if (userToken) {
-        console.log(userData)
-        // dispatch(UserDataActions.refreshUser(userToken))//
         return (
 
             <Content>
@@ -51,7 +57,6 @@ const AccountScreen = props => {
                         Alert.alert("Modal has been closed.");
                     }}
                 >
-
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                             <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Really log out?</Text>
@@ -63,15 +68,45 @@ const AccountScreen = props => {
                             >
                                 <Text style={styles.textStyle}>Nevermind</Text>
                             </TouchableHighlight>
-
                             <TouchableHighlight
                                 style={{ ...styles.openButton, backgroundColor: "#FF9933" }}
                                 onPress={() => {
-                                    // props.navigation.navigate("Auth")
                                     logOutUser()
                                 }}
                             >
                                 <Text style={styles.textStyle}>Log Out</Text>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
+                </Modal>
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={unhideModalVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                    }}
+                >
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={{ fontWeight: 'bold', fontSize: 18, textAlign: 'center', paddingVertical: 15 }}>Do you really want to unhide every offer?</Text>
+                            <TouchableHighlight
+                                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                                onPress={() => {
+                                    setUnhideModalVisible(!unhideModalVisible);
+                                }}
+                            >
+                                <Text style={styles.textStyle}>Nevermind</Text>
+                            </TouchableHighlight>
+                            <TouchableHighlight
+                                style={{ ...styles.openButton, backgroundColor: "#FF9933" }}
+                                onPress={() => {
+                                    unhideOffers()
+                                    setUnhideModalVisible(!unhideModalVisible)
+                                }}
+                            >
+                                <Text style={styles.textStyle}>Yes, unhide!</Text>
                             </TouchableHighlight>
                         </View>
                     </View>
@@ -96,7 +131,7 @@ const AccountScreen = props => {
                         <Icon name="arrow-forward" />
                     </Right>
                 </ListItem>
-                <ListItem>
+                {/* <ListItem>
                     <Left>
                         <Text>Refer a Friend!</Text>
                     </Left>
@@ -104,8 +139,8 @@ const AccountScreen = props => {
                         <Icon name="arrow-forward" />
                     </Right>
 
-                </ListItem >
-                <ListItem onPress={() => { unhideOffers() }}>
+                </ListItem > */}
+                <ListItem onPress={() => { setUnhideModalVisible(true) }}>
                     <Left>
                         <Text>Unhide Offers</Text>
                     </Left>
@@ -121,6 +156,11 @@ const AccountScreen = props => {
                         <Icon name="ios-log-out" />
                     </Right>
                 </ListItem>
+                <AdMobBanner
+                    bannerSize='fullBanner'
+                    adUnitID="ca-app-pub-2960114332907260/9893377403" // Test ID, Replace with your-admob-unit-id
+                    servePersonalizedAds // true or false
+                    onDidFailToReceiveAdWithError={() => { console.log("Couldn't load ad banner") }} />
                 <Separator bordered>
                     <Text>Information</Text>
                 </Separator>
@@ -133,7 +173,7 @@ const AccountScreen = props => {
                 <ListItem onPress={() => props.navigation.navigate('Terms')}>
                     <Text>Terms of Service</Text>
                 </ListItem>
-                <ListItem last onPress={() => Linking.openURL("mailto:support@example.com")}>
+                <ListItem last onPress={() => Linking.openURL("mailto:techforsure@gmail.com")}>
                     <Left>
                         <Text>Contact Us!</Text>
                     </Left>
@@ -151,7 +191,7 @@ const AccountScreen = props => {
             <View>
                 <Text>It looks like you're not signed in:</Text>
                 <Button title="Log in" onPress={() => { props.navigation.navigate('Auth') }}></Button>
-                <Button title="Sign Up"></Button>
+                {/* <Button title="Sign Up"></Button> */}
             </View>
         )
     }

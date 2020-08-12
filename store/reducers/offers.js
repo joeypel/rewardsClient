@@ -11,7 +11,6 @@ export default (state = initialState, action) => {
         case "UNHIDEALL":
             return initialState;
         case "UNHIDE":
-            // state.hidden.filter(item => console.log(item))
             return { ...state, hidden: state.hidden.filter(item => item !== action.offerName) };
         default:
             return state;

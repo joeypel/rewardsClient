@@ -5,11 +5,11 @@ import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
 import TaskStack from '../stacks/TaskStack';
 import RewardsStack from '../stacks/RewardsStack'
 import AccountStack from '../stacks/AccountStack'
 import AuthScreen from '../screens/AuthScreen'
+import SpinnerStack from '../stacks/SpinnerStack'
 
 import TutorialSlider from '../components/TutorialSlider'
 
@@ -42,6 +42,14 @@ export default function BottomTabNavigator({ navigation, route }) {
           component={TaskStack}
           options={{
             tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+          }}
+        />
+        <BottomTab.Screen
+          name="Spin"
+          component={SpinnerStack}
+          options={{
+            title: 'Spin',
+            tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-aperture" />,
           }}
         />
         <BottomTab.Screen

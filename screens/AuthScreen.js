@@ -7,7 +7,8 @@ import {
   Button,
   ActivityIndicator,
   Alert,
-  Text
+  Text,
+  Platform
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
@@ -107,8 +108,8 @@ const AuthScreen = props => {
 
   return (
     <KeyboardAvoidingView
-      behavior="padding"
-      keyboardVerticalOffset={50}
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      // keyboardVerticalOffset={20}
       style={styles.screen}
     >
       <LinearGradient colors={['#003f5c', '#00AFFF']} style={styles.gradient}>
@@ -174,9 +175,11 @@ const styles = StyleSheet.create({
     flex: 1
   },
   gradient: {
+    backgroundColor: 'green',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: '100%'
   },
   authContainer: {
     width: '80%',

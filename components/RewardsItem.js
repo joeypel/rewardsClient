@@ -33,7 +33,7 @@ const RewardsItem = props => {
           </Left>
         </CardItem>
         <CardItem cardBody>
-          <Image source={{ uri: props.image }} style={{ height: 125, width: '100%', resizeMode: 'contain' }} />
+          <Image source={{ uri: props.image }} style={{ height: 75, width: '100%', resizeMode: 'contain' }} />
         </CardItem>
         <CardItem>
           <Body style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
