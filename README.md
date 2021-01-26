@@ -10,10 +10,10 @@
 
 ## Demo
 
-<img src="https://github.com/yoej/rewardsClient/blob/master/IMG_0603.PNG.png" width="300" />
-<img src="https://github.com/yoej/rewardsClient/blob/master/IMG_0600.PNG.png" width="300" />
-<img src="https://github.com/yoej/rewardsClient/blob/master/IMG_0601.PNG.png" width="300" />
-<img src="https://github.com/yoej/rewardsClient/blob/master/IMG_0602.PNG.png" width="300" />
+<img src="https://github.com/yoej/rewardsClient/blob/master/IMG_0603.PNG" width="300" />
+<img src="https://github.com/yoej/rewardsClient/blob/master/IMG_0600.PNG" width="300" />
+<img src="https://github.com/yoej/rewardsClient/blob/master/IMG_0601.PNG" width="300" />
+<img src="https://github.com/yoej/rewardsClient/blob/master/IMG_0602.PNG" width="300" />
 
 ## Errors and bugs
 
